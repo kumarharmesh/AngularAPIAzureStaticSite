@@ -1,0 +1,11 @@
+
+<ul >
+    <li *ngFor="let c of colors">
+       <p  (click)="raise(c)"
+           [style.backgroundColor]="c" 
+           [style.width]="'200px'"
+           [style.color]="'white'">
+           {{c}}
+        </p>   
+</li>
+</ul>

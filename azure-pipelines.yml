@@ -1,0 +1,62 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- none
+
+stages:
+  - stage: build
+    jobs:
+      - job: build
+        displayName: 'Generate angular artifacts for publish'
+        steps:
+          - task: Npm@1
+            displayName: 'install angular'
+            inputs:
+              command: custom
+              customCommand: 'install -g @angular/cli@16.2.8'
+          - task: Npm@1
+            displayName: 'Install packages'
+            inputs:
+              command: install
+          - task: Npm@1
+            displayName: 'Build angular app for production'
+            inputs:
+              command: custom
+              customCommand: 'run build -c production'
+          - task: PublishBuildArtifacts@1
+            displayName: 'Publish build artifacts'
+            inputs:
+              ArtifactName: dist
+              publishLocation: Container
+              PathtoPublish: dist
+
+  - stage: 'deployment'
+    dependsOn: build
+    condition: and(succeeded(), eq(variables['Build.SourceBranchName'], 'master'))
+    jobs:
+      - job: deploy
+        displayName: 'Publish angular app to Azure App Service'
+       
+        steps:
+        - task: DownloadPipelineArtifact@2
+          displayName: 'download pipeline artifacts'
+          inputs:
+           artifactName: dist
+           targetPath: '$(Pipeline.Workspace)'
+           buildType: 'current'
+
+        - task: AzureWebApp@1
+          inputs:
+            azureSubscription: 'Free Trial (5df8bbe9-c5cd-4bfd-ab11-7da9acff33bf)'
+            appType: 'webApp'
+            appName: 'NgPhotos'
+            package: '$(Pipeline.Workspace)/angular16-app'
+            deploymentMethod: zipDeploy
+
+           
+               
+            
+

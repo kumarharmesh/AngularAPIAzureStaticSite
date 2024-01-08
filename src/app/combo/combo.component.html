@@ -1,0 +1,44 @@
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-4">
+        <select class="form-select mt-4" (change)="combo=s.value" #s>
+            <option disabled value="" selected>--Select a Continent--</option>
+            <option *ngFor="let c of continents">{{c}}</option>
+        </select>
+        
+    </div>
+    <div class="col-md-5"></div>
+</div>
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        <table class="table table-bordered mt-3">
+            <thead>
+                <tr>
+                    <th>Country Name</th>
+                    <th>Capital</th>
+                    <th>Continent</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let c of country |filter: combo ">
+                    <td>{{c.name}}</td>
+                    <td>{{c.capital}}</td>
+                    <td>{{c.continent}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-3"></div>
+</div>
+<hr/>
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        <app-color [colors]="ary" (colorEvent)="forecolor=$event"></app-color>
+        <hr/>
+        <p [style.color]="forecolor">I got this color from color component</p>
+    </div>
+    <div class="col-md-3"></div>
+</div>

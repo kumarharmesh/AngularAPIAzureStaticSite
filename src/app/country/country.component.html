@@ -1,0 +1,36 @@
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-4">
+        <!-- <select class="form-select">
+            <option disabled value="" selected>--Select a Continent--</option>
+        </select> -->
+        <div style="margin-top: 20px;">
+        <label class="form-label">Continent</label>
+        <input [(ngModel)]="continent" type="text"/>
+    </div>
+    </div>
+    <div class="col-md-5"></div>
+</div>
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Country Name</th>
+                    <th>Capital</th>
+                    <th>Continent</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let c of countries |filter: continent ">
+                    <td>{{c.name}}</td>
+                    <td>{{c.capital}}</td>
+                    <td>{{c.continent}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-3"></div>
+</div>

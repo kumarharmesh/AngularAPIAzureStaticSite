@@ -1,0 +1,14 @@
+
+<h1>{{count}}</h1>
+<br/>
+<button class="btn btn-success" (click)="count=count+1">Increase</button>
+<button class="btn btn-info" style="margin-left:10px;" id='b1' (click)="count=count-1">Decrease</button>
+
+<br/>
+<br/>
+<br/>
+<button class="btn btn-warning" (click)="c1()">Apply Class1</button>
+<button class="btn btn-danger" style="margin-left:10px;" id='b4' (click)="c2()">Apply Class2</button>
+<br/>
+<br/>
+<p [ngClass]="ary">Counter Works!</p>

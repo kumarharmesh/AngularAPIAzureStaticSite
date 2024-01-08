@@ -1,0 +1,29 @@
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <label>Name</label>
+        <br/>
+        <input type="text" #n class="form-control"/>
+        <br/>
+        <select class="form-select" #c>
+            <option selected disabled value="">--Select a Category--</option>
+            <option value="10">Birds</option>
+            <option value="11">Fruits</option>
+            <option value="12">Flowers</option>
+        </select>
+        <br/>
+        <label>Select Photo</label>
+        <br/>
+        <input type="file" (change)="upload(f)" #f  class="form-control"/>
+        <br/>
+        <button (click)="add(n.value,c.value)" class="btn btn-primary mt-2">Add Photo</button>
+    </div>
+    <div class="col-md-4"></div>
+</div>
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 text-danger">
+        {{errorMsg}}
+    </div>
+    <div class="col-md-3"></div>
+</div>
